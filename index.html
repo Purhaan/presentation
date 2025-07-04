@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mycorrhizal Mystery Solver 🔬</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <title>🍄 Mycorrhizal AI - Because Manual Counting is So Last Century</title>
     <style>
         * {
             margin: 0;
@@ -15,164 +14,92 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
-        /* Animations */
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            0%, 20%, 40%, 60%, 80% {
-                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-            }
-            0% {
-                opacity: 0;
-                transform: scale3d(.3, .3, .3);
-            }
-            20% {
-                transform: scale3d(1.1, 1.1, 1.1);
-            }
-            40% {
-                transform: scale3d(.9, .9, .9);
-            }
-            60% {
-                opacity: 1;
-                transform: scale3d(1.03, 1.03, 1.03);
-            }
-            80% {
-                transform: scale3d(.97, .97, .97);
-            }
-            100% {
-                opacity: 1;
-                transform: scale3d(1, 1, 1);
-            }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes scroll {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(15px); opacity: 0; }
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Animation classes */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in-up.animate-in {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-in-left.animate-in {
-            animation: slideInLeft 0.8s ease forwards;
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-in-right.animate-in {
-            animation: slideInRight 0.8s ease forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-
-        /* Hero Section */
-        #hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            color: white;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffffff, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: #93c5fd;
-            margin-bottom: 3rem;
-        }
-
-        .hero-stats {
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin-top: 3rem;
         }
 
         .stat-card {
@@ -182,1044 +109,1124 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
+            transform: scale(0.8);
+            animation: popIn 0.6s ease forwards;
         }
 
-        .counter {
+        .stat-card:nth-child(1) { animation-delay: 0.2s; }
+        .stat-card:nth-child(2) { animation-delay: 0.4s; }
+        .stat-card:nth-child(3) { animation-delay: 0.6s; }
+        .stat-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .stat-number {
             font-size: 3rem;
             font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
+            color: #4ecdc4;
         }
 
-        .counter.counting {
-            text-shadow: 0 0 20px currentColor;
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
         }
 
-        /* Mouse scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+        /* Features Section */
+        .features {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
         }
 
-        .mouse {
-            width: 25px;
-            height: 40px;
-            border: 2px solid #fff;
-            border-radius: 13px;
-            position: relative;
-            margin: 0 auto 10px;
-        }
-
-        .wheel {
-            height: 5px;
-            width: 2px;
-            background: #fff;
-            margin: 5px auto;
-            border-radius: 1px;
-            animation: scroll 2s infinite;
-        }
-
-        /* Section styling */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
+        .features h2 {
             font-size: 3rem;
-            font-weight: bold;
             text-align: center;
             margin-bottom: 3rem;
+            color: #2c3e50;
         }
 
-        /* Problem section */
-        #problem {
-            background: #f8fafc;
-        }
-
-        .problem-grid {
+        .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
-        .problem-card {
+        .feature-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .problem-card:hover {
-            transform: translateY(-5px);
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
-        /* Solution section */
-        #solution {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        .feature-card:hover::before {
+            transform: translateX(0);
         }
 
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 3rem;
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Performance Section */
+        .performance {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            color: #2c3e50;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-            padding: 1rem;
-            border-radius: 50%;
-            min-width: 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        /* Technical section */
-        #technical {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        .old-way {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .new-way {
+            border-left: 5px solid #27ae60;
+            position: relative;
+        }
+
+        .new-way::after {
+            content: '🚀';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 2rem;
+            background: #27ae60;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 2s ease;
+        }
+
+        .manual-progress {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            width: 0%;
+        }
+
+        .ai-progress {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            width: 0%;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3rem;
-        }
-
-        .tech-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .code-snippet {
-            background: #000;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-        }
-
-        .code-snippet pre {
-            color: #00ff00;
-            font-size: 0.9rem;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .metric-card {
+        .tech-item {
             background: rgba(255, 255, 255, 0.1);
             padding: 2rem;
             border-radius: 15px;
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #60a5fa;
-        }
-
-        /* Validation section */
-        #validation {
-            background: white;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 3rem 0;
-            transition: transform 0.3s ease;
-        }
-
-        .chart-container:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-animate {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            margin: 1rem;
-        }
-
-        .btn-animate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-            background: #f8fafc;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .result-header {
-            font-weight: bold;
-            padding: 1rem;
-            background: #3b82f6;
-            color: white;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .result-cell {
-            padding: 1rem;
-            background: white;
-            text-align: center;
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-        }
-
-        .result-cell.winner {
-            background: #dcfce7;
-            border-color: #16a34a;
-            font-weight: bold;
-        }
-
-        .verdict-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 3px solid;
-        }
-
-        .big-number {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        /* Correlation section */
-        #correlation {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            color: white;
-        }
-
-        .correlation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3rem;
-        }
-
-        .correlation-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .correlation-value {
-            margin: 2rem 0;
-        }
-
-        /* Impact section */
-        #impact {
-            background: linear-gradient(45deg, #7c3aed 0%, #3b82f6 100%);
-            color: white;
-        }
-
-        .impact-timeline .timeline-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .timeline-number {
-            background: linear-gradient(45deg, #f59e0b, #ef4444);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 2rem;
-            flex-shrink: 0;
-        }
-
-        .timeline-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .timeline-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .card-icon {
-            font-size: 2rem;
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .tech-logo {
+            font-size: 4rem;
             margin-bottom: 1rem;
         }
 
-        /* Conclusion section */
-        #conclusion {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-        }
-
-        .final-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-final {
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
             text-align: center;
-            padding: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Scrolling Counter Animation */
+        .counter {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        /* Chart Container */
+        .chart-container {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .cta-buttons {
+            padding: 2rem;
             margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-primary {
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .easter-egg {
-            margin-top: 3rem;
-            font-style: italic;
-            opacity: 0.7;
-        }
-
-        /* Responsive design */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
+            .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero-subtitle {
+            .hero .subtitle {
                 font-size: 1.2rem;
             }
             
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .problem-grid,
-            .tech-grid,
-            .correlation-grid {
+            .comparison-container {
                 grid-template-columns: 1fr;
             }
             
-            .results-grid {
-                grid-template-columns: repeat(3, 1fr);
-                font-size: 0.9rem;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
+        }
+
+        /* Fun animations */
+        .wiggle {
+            animation: wiggle 2s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 7%, 14%, 21%, 28%, 35%, 42%, 49%, 56%, 63%, 70%, 77%, 84%, 91%, 98%, 100% {
+                transform: rotate(0deg);
             }
-            
-            .timeline-icon {
-                margin: 0 0 1rem 0;
+            3.5%, 10.5%, 17.5%, 24.5%, 31.5%, 38.5%, 45.5%, 52.5%, 59.5%, 66.5%, 73.5%, 80.5%, 87.5%, 94.5% {
+                transform: rotate(1deg);
             }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
     <!-- Hero Section -->
-    <section id="hero">
+    <section class="section hero">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    The Mycorrhizal Mystery Solver 🔬
-                </h1>
-                
-                <p class="hero-subtitle">
-                    When traditional methods think 70% but reality says 13% 
-                    <span style="color: #fbbf24;">🤔</span>
-                </p>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="counter" style="color: #10b981;" data-target="39.5">0</div>
-                        <div>× More Accurate</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="counter" style="color: #ef4444;" data-target="59.53">0</div>
-                        <div>% Manual Error</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="counter" style="color: #3b82f6;" data-target="1.51">0</div>
-                        <div>% AI Error</div>
-                    </div>
+            <h1>🍄 Mycorrhizal AI</h1>
+            <p class="subtitle">Because counting fungal colonization manually is like using a microscope as a hammer</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number counter" data-target="512">0</div>
+                    <div class="stat-label">Model Input Size (px)</div>
                 </div>
-                
-                <div class="scroll-indicator">
-                    <div class="mouse">
-                        <div class="wheel"></div>
-                    </div>
-                    <p style="color: #94a3b8; margin-top: 1rem;">Scroll to discover the truth</p>
+                <div class="stat-card">
+                    <div class="stat-number counter" data-target="1000">0</div>
+                    <div class="stat-label">Images/Hour</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number counter" data-target="600">0</div>
+                    <div class="stat-label">Manual Overestimation (%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number counter" data-target="0">100</div>
+                    <div class="stat-label">PhD Student Tears</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section id="problem" class="section">
+    <!-- Features Section -->
+    <section class="section features">
         <div class="container">
-            <h2 class="section-title slide-in-left">
-                Houston, We Have a Problem 🚀
-            </h2>
-            
-            <div class="problem-grid">
-                <div class="problem-card fade-in-up delay-1">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #dc2626;">
-                        Traditional Manual Method Says: 
-                        <span class="counter" style="font-size: 2.5rem; color: #dc2626;" data-target="69.5">0</span>%
-                    </h3>
-                    <p style="color: #6b7280;">
-                        Scientists counting grid intersections like it's 1990 📏
-                        <br>Observer bias included, free of charge! 
-                    </p>
-                </div>
-                
-                <div class="problem-card fade-in-up delay-2">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #2563eb;">
-                        Our AI Says: 
-                        <span class="counter" style="font-size: 2.5rem; color: #2563eb;" data-target="4.7">0</span>%
-                    </h3>
-                    <p style="color: #6b7280;">
-                        Plot twist: What if the AI is actually right? 🤯
-                        <br>Time to find out who's telling the truth...
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section id="solution" class="section">
-        <div class="container">
-            <h2 class="section-title slide-in-right">
-                Enter: The AI Detective 🕵️‍♂️
-            </h2>
-            
-            <div class="architecture-timeline">
-                <div class="timeline-item fade-in-up delay-1">
-                    <div class="timeline-icon">🏗️</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Architecture: UNet++ with EfficientNet-B4</h3>
-                        <p>Because regular UNet wasn't fancy enough. We needed the "plus plus" version! 
-                           Transfer learning from ImageNet - those cat photos finally useful for fungus detection.</p>
+            <h2>Features That'll Make You Forget Excel Exists</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">Enhanced Transfer Learning</div>
+                    <div class="feature-description">
+                        Uses UNet++ with EfficientNet-B4 backbone. It's like having a PhD student who never sleeps, never complains, and actually enjoys counting fungal structures.
                     </div>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-2">
-                    <div class="timeline-icon">🎯</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Few-Shot Learning: Only 
-                            <span class="counter" style="color: #16a34a;" data-target="24">0</span> Training Images</h3>
-                        <p>Yes, you read that right. TWENTY-FOUR. While other models need thousands of images, 
-                           ours learned mycorrhizae faster than a PhD student learns to avoid their advisor.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Bulk Analysis & CSV Export</div>
+                    <div class="feature-description">
+                        Process hundreds of images faster than you can say "mycorrhizal symbiosis." Exports to CSV because we know you love your spreadsheets (unfortunately).
                     </div>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-3">
-                    <div class="timeline-icon">⚡</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Processing Power: 
-                            <span class="counter" style="color: #2563eb;" data-target="262144">0</span> Pixels Analyzed</h3>
-                        <p>Every. Single. Pixel. Meanwhile, manual methods check ~100 points. 
-                           It's like comparing a magnifying glass to the Hubble telescope.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">🧊</div>
+                    <div class="feature-title">Smart Transfer Learning</div>
+                    <div class="feature-description">
+                        Phase 1: Freezes encoder layers (like putting ImageNet knowledge in a protective bubble). Phase 2: Gradually unfreezes layers for fine-tuning. It's like teaching an art student - first they copy the masters, then they develop their own style.
                     </div>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-4">
-                    <div class="timeline-icon">🎨</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Loss Function: Enhanced Combined Loss</h3>
-                        <p>IoU Loss + Focal Loss + Dice Loss = One very confused but highly accurate AI. 
-                           We threw everything at it except the kitchen sink (we ran out of compute budget).</p>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <div class="feature-title">Adaptive Loss Weighting</div>
+                    <div class="feature-description">
+                        Combines IoU, Focal, and Dice losses with dynamic weights. Handles class imbalance better than a yoga instructor handles difficult poses. Auto-adjusts for sparse vs dense colonization patterns.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <div class="feature-title">Smart Data Augmentation</div>
+                    <div class="feature-description">
+                        Careful geometric transforms that preserve root structure integrity. No aggressive distortions that would make mycorrhiza look like abstract art. Uses Albumentations with ImageNet normalization.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <div class="feature-title">UNet++ Architecture</div>
+                    <div class="feature-description">
+                        Enhanced U-Net with nested skip pathways and deep supervision. Like having multiple radiologists look at the same X-ray, but they all agree with each other (unlike real radiologists).
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-title">Real-time Visualization</div>
+                    <div class="feature-description">
+                        See colonization overlays in real-time. Red areas = mycorrhiza detected. It's like having X-ray vision for fungal networks.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">GPU Acceleration</div>
+                    <div class="feature-description">
+                        Leverages CUDA for lightning-fast processing. Your GPU will finally do something more useful than mining cryptocurrency.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technical Section -->
-    <section id="technical" class="section">
+    <!-- Performance Comparison -->
+    <section class="section performance">
         <div class="container">
-            <h2 class="section-title slide-in-left">
-                Under the Hood 🔧
-            </h2>
-            
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #06b6d4;">Training Pipeline</h3>
-                    <div class="code-snippet">
-                        <pre>def train_mycorrhizal_ai():
-    # Phase 1: Freeze encoder (like Elsa, but for weights)
-    model.freeze_encoder()
-    train_epochs(20)
-    
-    # Phase 2: Unfreeze and fine-tune  
-    model.unfreeze_encoder()
-    fine_tune_epochs(30)
-    
-    # Magic happens here ✨
-    return "IoU: 0.55, Dice: 0.68, Accuracy: 97%"</pre>
-                    </div>
-                </div>
-                
-                <div class="tech-card">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #10b981;">Data Augmentation</h3>
-                    <div>
-                        <div style="margin-bottom: 1rem; display: flex; align-items: center;">
-                            <span style="font-size: 1.5rem; margin-right: 1rem;">🔄</span>
-                            <span>Random Rotation (because fungi don't follow traffic rules)</span>
-                        </div>
-                        <div style="margin-bottom: 1rem; display: flex; align-items: center;">
-                            <span style="font-size: 1.5rem; margin-right: 1rem;">🎨</span>
-                            <span>Color Jittering (teaching AI that not all fungi are the same shade of blue)</span>
-                        </div>
-                        <div style="margin-bottom: 1rem; display: flex; align-items: center;">
-                            <span style="font-size: 1.5rem; margin-right: 1rem;">📏</span>
-                            <span>Elastic Transform (yoga for images)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 4rem;">
-                <h3 style="font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 2rem;">Performance Metrics</h3>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value counter" data-target="0.55">0.00</div>
-                        <div>IoU Score</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value counter" data-target="0.68">0.00</div>
-                        <div>Dice Coefficient</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value counter" data-target="97">0</div>
-                        <div>Pixel Accuracy %</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value counter" data-target="24">0</div>
-                        <div>Training Images</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Validation Section -->
-    <section id="validation" class="section">
-        <div class="container">
-            <h2 class="section-title slide-in-right">
-                The Moment of Truth 🎭
-            </h2>
-            
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="font-size: 1.25rem; color: #6b7280; margin-bottom: 1rem;">
-                    "But wait," said the professor, "Your AI must be wrong!" 🤨
-                </p>
-                <p style="font-size: 1.25rem; color: #1f2937; font-weight: 600;">
-                    Challenge accepted. Time to manually annotate some images and find out who's right...
+            <h2>The Before & After Story</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                From "I've been staring at these roots for 6 hours and getting it completely wrong" to "AI nailed it in 6 minutes"
+            </p>
+            <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <h4 style="color: #856404; margin-bottom: 0.5rem;">🚨 SHOCKING REAL DATA REVEALED 🚨</h4>
+                <p style="color: #856404; font-size: 1.1rem; margin: 0;">
+                    Our lab data shows manual counting has a <strong>600% overestimation bias!</strong><br>
+                    While AI predictions stay within <strong>±2% of ground truth</strong>
                 </p>
             </div>
             
-            <!-- Animated Chart Container -->
+            <div class="comparison-container">
+                <div class="comparison-card old-way">
+                    <h3>👨‍🔬 Manual Method</h3>
+                    <div class="stat-number" style="color: #e74c3c;">600%</div>
+                    <p><strong>OVERESTIMATION BIAS!</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill manual-progress"></div>
+                    </div>
+                    <p><strong>Accuracy:</strong> Ground Truth: 6.6-13.9%</p>
+                    <p><strong>Manual Results:</strong> 62.5-76.2% 😱</p>
+                    <p><strong>Reproducibility:</strong> Consistently wrong</p>
+                    <p><strong>Researcher Sanity:</strong> What sanity?</p>
+                </div>
+                
+                <div class="comparison-card new-way">
+                    <h3>🤖 AI Method</h3>
+                    <div class="stat-number" style="color: #27ae60;">±2%</div>
+                    <p><strong>Average Error from Truth</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill ai-progress"></div>
+                    </div>
+                    <p><strong>Accuracy:</strong> 8.76-12.68% (Truth: 6.6-13.9%)</p>
+                    <p><strong>Speed:</strong> 1000+ images/hour</p>
+                    <p><strong>Reproducibility:</strong> Perfect every time</p>
+                    <p><strong>Researcher Sanity:</strong> Fully preserved ✨</p>
+                </div>
+            </div>
+
             <div class="chart-container">
-                <canvas id="validationChart" width="800" height="400"></canvas>
-                <div style="text-align: center; margin-top: 1rem;">
-                    <button class="btn-animate" onclick="animateValidationChart()">
-                        🎬 Play Validation Drama
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Results Grid -->
-            <div class="results-grid">
-                <div class="result-header">Image</div>
-                <div class="result-header">Ground Truth</div>
-                <div class="result-header">AI Prediction</div>
-                <div class="result-header">Manual Method</div>
-                <div class="result-header">Winner</div>
-                
-                <div class="result-cell">IMG1</div>
-                <div class="result-cell">
-                    <span class="counter" data-target="13.9">0</span>%
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="12.68">0</span>%
-                    <div style="font-size: 0.8rem; color: #16a34a;">(±1.22%)</div>
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="70">0</span>%
-                    <div style="font-size: 0.8rem; color: #dc2626;">(±56.1%)</div>
-                </div>
-                <div class="result-cell winner">🤖 AI</div>
-                
-                <div class="result-cell">IMG9</div>
-                <div class="result-cell">
-                    <span class="counter" data-target="9.4">0</span>%
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="11.42">0</span>%
-                    <div style="font-size: 0.8rem; color: #16a34a;">(±2.02%)</div>
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="68.75">0</span>%
-                    <div style="font-size: 0.8rem; color: #dc2626;">(±59.35%)</div>
-                </div>
-                <div class="result-cell winner">🤖 AI</div>
-                
-                <div class="result-cell">IMG10</div>
-                <div class="result-cell">
-                    <span class="counter" data-target="6.6">0</span>%
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="8.76">0</span>%
-                    <div style="font-size: 0.8rem; color: #16a34a;">(±2.16%)</div>
-                </div>
-                <div class="result-cell">
-                    <span class="counter" data-target="62.5">0</span>%
-                    <div style="font-size: 0.8rem; color: #dc2626;">(±55.9%)</div>
-                </div>
-                <div class="result-cell winner">🤖 AI</div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem;">The Verdict 👨‍⚖️</h3>
-                <div class="verdict-cards">
-                    <div class="card" style="background: #dcfce7; border-color: #16a34a;">
-                        <h4 style="font-size: 1.5rem; font-weight: bold; color: #15803d;">AI Method</h4>
-                        <div class="big-number counter" style="color: #16a34a;" data-target="1.51">0</div>
-                        <div>Average Error %</div>
-                        <div style="margin-top: 1rem; font-weight: 600;">🎯 Bullseye accurate!</div>
-                    </div>
-                    
-                    <div class="card" style="background: #fef2f2; border-color: #dc2626;">
-                        <h4 style="font-size: 1.5rem; font-weight: bold; color: #dc2626;">Manual Method</h4>
-                        <div class="big-number counter" style="color: #dc2626;" data-target="59.53">0</div>
-                        <div>Average Error %</div>
-                        <div style="margin-top: 1rem; font-weight: 600;">🎪 Missing by a circus tent</div>
-                    </div>
-                    
-                    <div class="card" style="background: #dbeafe; border-color: #2563eb;">
-                        <h4 style="font-size: 1.5rem; font-weight: bold; color: #2563eb;">Improvement</h4>
-                        <div class="big-number counter" style="color: #2563eb;" data-target="39.5">0</div>
-                        <div>× More Accurate</div>
-                        <div style="margin-top: 1rem; font-weight: 600;">🚀 To infinity and beyond!</div>
+                <h3 style="text-align: center; margin-bottom: 1rem;">🎯 REAL DATA: AI vs Manual vs Ground Truth</h3>
+                <p style="text-align: center; margin-bottom: 2rem; color: #e74c3c; font-weight: bold; font-size: 1.1rem;">
+                    Manual counting shows MASSIVE overestimation bias! 📈
+                </p>
+                <canvas id="comparisonChart" width="800" height="450"></canvas>
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Key Findings from Real Lab Data:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="text-align: center; color: #27ae60;">
+                            <strong>🤖 AI Accuracy:</strong><br>
+                            <span style="font-size: 1.2rem;">±2% average error</span><br>
+                            <small>Consistently close to ground truth</small>
+                        </div>
+                        <div style="text-align: center; color: #e74c3c;">
+                            <strong>👨‍🔬 Manual Bias:</strong><br>
+                            <span style="font-size: 1.2rem;">+600% overestimation!</span><br>
+                            <small>Systematic counting bias</small>
+                        </div>
+                        <div style="text-align: center; color: #3498db;">
+                            <strong>🎯 Ground Truth:</strong><br>
+                            <span style="font-size: 1.2rem;">6.6% - 13.9% range</span><br>
+                            <small>Actual colonization levels</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Correlation Section -->
-    <section id="correlation" class="section">
+    <!-- Backend Architecture -->
+    <section class="section" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white;">
         <div class="container">
-            <h2 class="section-title slide-in-left">
-                The Correlation Game 📈
-            </h2>
+            <h2>Under the Hood: The Smart Architecture</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">
+                Because good AI is like good coffee - it's all about the process
+            </p>
             
-            <div class="correlation-grid">
-                <div class="correlation-card">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #10b981;">
-                        AI vs Ground Truth
-                    </h3>
-                    <div class="correlation-value">
-                        <span class="counter" style="font-size: 4rem; font-weight: bold;" data-target="0.868">0.000</span>
-                    </div>
-                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">Correlation Coefficient</div>
-                    <div style="color: #94a3b8;">
-                        Strong positive correlation! 💪<br>
-                        Like peanut butter and jelly, but for science.
+            <div class="feature-grid">
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); color: #2c3e50;">
+                    <div class="feature-icon">🧊➡️🔥</div>
+                    <div class="feature-title">Two-Phase Training Strategy</div>
+                    <div class="feature-description">
+                        <strong>Phase 1:</strong> Freeze encoder layers (keep ImageNet knowledge locked). Train only decoder for 20 epochs.<br>
+                        <strong>Phase 2:</strong> Unfreeze encoder gradually, fine-tune with reduced learning rate. Like teaching someone to drive - first learn the basics, then adapt to local roads.
                     </div>
                 </div>
                 
-                <div class="correlation-card">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #f59e0b;">
-                        Manual vs Ground Truth
-                    </h3>
-                    <div class="correlation-value">
-                        <span class="counter" style="font-size: 4rem; font-weight: bold;" data-target="0.664">0.000</span>
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); color: #2c3e50;">
+                    <div class="feature-icon">⚡🎯</div>
+                    <div class="feature-title">Enhanced Loss Combination</div>
+                    <div class="feature-description">
+                        <strong>IoU Loss (50%):</strong> Measures overlap quality<br>
+                        <strong>Focal Loss (30%):</strong> Handles class imbalance<br>
+                        <strong>Dice Loss (20%):</strong> Optimizes for segmentation<br>
+                        Auto-adjusts weights based on colonization sparsity. It's like having three experts voting on each pixel.
                     </div>
-                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">Correlation Coefficient</div>
-                    <div style="color: #94a3b8;">
-                        Moderate correlation 😐<br>
-                        Like ordering pizza but getting a salad.
+                </div>
+                
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); color: #2c3e50;">
+                    <div class="feature-icon">🏗️🔗</div>
+                    <div class="feature-title">UNet++ Skip Connections</div>
+                    <div class="feature-description">
+                        Nested skip pathways with SCSE attention blocks. Multiple decoder paths at different depths provide redundancy. Like having backup plans for your backup plans - but actually useful.
+                    </div>
+                </div>
+                
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); color: #2c3e50;">
+                    <div class="feature-icon">🔄📊</div>
+                    <div class="feature-title">Adaptive Preprocessing</div>
+                    <div class="feature-description">
+                        <strong>Otsu Thresholding:</strong> Auto-fixes non-binary masks<br>
+                        <strong>Stratified Splitting:</strong> Balanced train/val based on colonization ratios<br>
+                        <strong>Smart Augmentation:</strong> Preserves root structure integrity<br>
+                        Because garbage in = garbage out, even with fancy neural networks.
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+                <h3>Training Pipeline Workflow:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem;">📁</div>
+                        <div>Data Quality Check</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Diagnose & fix issues</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem;">🧊</div>
+                        <div>Phase 1: Frozen</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Decoder training only</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem;">🔥</div>
+                        <div>Phase 2: Fine-tune</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">End-to-end training</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem;">🎯</div>
+                        <div>Multi-threshold Test</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Find optimal cutoff</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem;">💾</div>
+                        <div>Best Model Save</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Ready for deployment</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Impact Section -->
-    <section id="impact" class="section">
+    <!-- Tech Stack -->
+    <section class="section tech-stack">
         <div class="container">
-            <h2 class="section-title slide-in-right">
-                Why This Matters 🌍
-            </h2>
-            
-            <div class="impact-timeline">
-                <div class="timeline-item fade-in-up delay-1">
-                    <div class="timeline-number">1</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Methodological Breakthrough</h3>
-                        <p>First AI to outperform traditional mycorrhizal quantification by 40×. 
-                           That's not improvement, that's revolution! 🔥</p>
-                    </div>
+            <h2>Powered by the Cool Kids' Tech Stack</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                No, we didn't just use Excel macros (though we respect the hustle)
+            </p>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-logo">🐍</div>
+                    <h3>Python</h3>
+                    <p>Because life's too short for MATLAB licensing</p>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-2">
-                    <div class="timeline-number">2</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Scientific Revelation</h3>
-                        <p>Manual methods have been overestimating by 600% this whole time. 
-                           Oops! 😅 Time to rewrite some textbooks.</p>
-                    </div>
+                <div class="tech-item">
+                    <div class="tech-logo">🔥</div>
+                    <h3>PyTorch</h3>
+                    <p>The AI framework that doesn't make you cry</p>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-3">
-                    <div class="timeline-number">3</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Democratization of Research</h3>
-                        <p>Any lab can now get accurate results with minimal training data. 
-                           No PhD in computer vision required! 🎓</p>
-                    </div>
+                <div class="tech-item">
+                    <div class="tech-logo">📊</div>
+                    <h3>Streamlit</h3>
+                    <p>Web apps without the web developer salary</p>
                 </div>
-                
-                <div class="timeline-item fade-in-up delay-4">
-                    <div class="timeline-number">4</div>
-                    <div>
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Future Applications</h3>
-                        <p>Agricultural monitoring, climate research, ecosystem health... 
-                           The possibilities are endless! 🌱</p>
-                    </div>
+                <div class="tech-item">
+                    <div class="tech-logo">🧠</div>
+                    <h3>UNet++</h3>
+                    <p>Segmentation so good, it segments your existential dread</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">⚡</div>
+                    <h3>CUDA</h3>
+                    <p>Making your GPU earn its electricity bill</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">📈</div>
+                    <h3>OpenCV</h3>
+                    <p>Computer vision that actually works</p>
                 </div>
             </div>
-            
-
         </div>
     </section>
 
-    <!-- Conclusion Section -->
-    <section id="conclusion" class="section">
+    <!-- Call to Action -->
+    <section class="section cta">
         <div class="container">
-            <div style="text-align: center;">
-                <h2 class="section-title slide-in-up">
-                    The End... Or Is It? 🎬
-                </h2>
-                
-                <div style="font-size: 1.25rem; color: #6b7280; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <p style="margin-bottom: 1rem;">
-                        We came, we trained (24 images), we conquered (traditional methods). 
-                        Our AI doesn't just detect mycorrhizae - it detects truth itself. 🔍✨
-                    </p>
-                    <p style="margin-bottom: 1rem;">
-                        Manual methods: "I think there's 70% colonization! 🤔"<br>
-                        Ground truth: "Actually it's 13.9% 📏"<br>
-                        Our AI: "13.68%. Close enough! 😎"
-                    </p>
-                </div>
-                
-                <div class="final-stats">
-                    <div class="stat-final">
-                        <div class="counter" style="font-size: 3rem; font-weight: bold; color: #16a34a;" data-target="39.5">0</div>
-                        <div style="color: #6b7280;">× More Accurate</div>
-                    </div>
-                    <div class="stat-final">
-                        <div class="counter" style="font-size: 3rem; font-weight: bold; color: #2563eb;" data-target="83.2">0</div>
-                        <div style="color: #6b7280;">% Accuracy</div>
-                    </div>
-                    <div class="stat-final">
-                        <div class="counter" style="font-size: 3rem; font-weight: bold; color: #7c3aed;" data-target="24">0</div>
-                        <div style="color: #6b7280;">Training Images</div>
-                    </div>
-                    <div class="stat-final">
-                        <div class="counter" style="font-size: 3rem; font-weight: bold; color: #dc2626;" data-target="0">0</div>
-                        <div style="color: #6b7280;">Regrets</div>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;">Ready to Revolutionize Mycorrhizal Research? 🚀</h3>
-                    <div class="cta-buttons">
-                        <button class="btn-primary" onclick="scrollToTop()">
-                            🔄 Experience the Magic Again
-                        </button>
-                        <button class="btn-secondary" onclick="alert('Research data download coming soon! 📊')">
-                            📊 Download Research Data
-                        </button>
-                        <button class="btn-secondary" onclick="alert('Source code available on GitHub! 💻')">
-                            💻 View Source Code
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="easter-egg">
-                    <p>🥚 Easter egg: If you made it this far, you're either really interested in mycorrhizae 
-                       or have excellent scrolling stamina. Either way, respect! 👏</p>
-                </div>
+            <h2>Ready to Join the AI Revolution?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                Stop counting pixels manually and start living your best researcher life
+            </p>
+            <a href="#" class="cta-button wiggle">🚀 Try the Demo</a>
+            <a href="#" class="cta-button pulse">📚 View Documentation</a>
+            <a href="#" class="cta-button">☕ Buy Me Coffee (I earned it)</a>
+            
+            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+                <h3>Fun Facts About This Project:</h3>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto; font-size: 1.1rem;">
+                    <li>🍕 Powered by approximately 47 pizzas and infinite coffee</li>
+                    <li>🐛 Debugged more issues than a QA tester's nightmare</li>
+                    <li>📊 Processed more root images than a botanist's fever dream</li>
+                    <li>🎯 Achieved higher accuracy than my weather predictions</li>
+                    <li>🧠 Uses more neural networks than actual neurons in my brain</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <script>
-        // Counter Animation
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const startTime = performance.now();
-            
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Easing function for smooth animation
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                const current = start + (target - start) * easeOut;
-                
-                element.textContent = target % 1 === 0 ? 
-                    Math.floor(current) : current.toFixed(2);
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.classList.remove('counting');
-                }
-            }
-            
-            element.classList.add('counting');
-            requestAnimationFrame(updateCounter);
-        }
-
         // Scroll-triggered animations
-        const observerOptions = {
-            threshold: 0.3,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Trigger counter animations
-                    const counters = entry.target.querySelectorAll('.counter[data-target]');
-                    counters.forEach(counter => {
-                        if (!counter.classList.contains('animated')) {
-                            const target = parseFloat(counter.dataset.target);
-                            animateCounter(counter, target);
-                            counter.classList.add('animated');
-                        }
-                    });
-                    
-                    // Add animation classes
-                    entry.target.classList.add('animate-in');
+        function handleScroll() {
+            const containers = document.querySelectorAll('.container');
+            
+            containers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.8;
+                
+                if (isVisible) {
+                    container.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }
 
-        // Observe all sections and animated elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Observe sections
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => observer.observe(section));
+        // Counter animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = parseInt(element.textContent);
+            const increment = (target - start) / (duration / 16);
+            let current = start;
             
-            // Observe animated elements
-            const animatedElements = document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right');
-            animatedElements.forEach(element => observer.observe(element));
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.round(current);
+                
+                if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        // Progress bar animation
+        function animateProgressBars() {
+            const manualBar = document.querySelector('.manual-progress');
+            const aiBar = document.querySelector('.ai-progress');
             
-            // Trigger hero section animations immediately
-            const heroCounters = document.querySelectorAll('#hero .counter[data-target]');
             setTimeout(() => {
-                heroCounters.forEach(counter => {
-                    const target = parseFloat(counter.dataset.target);
-                    animateCounter(counter, target);
-                });
-            }, 1000);
-        });
-
-        // Chart Animation Functions
-        let validationChart = null;
-
-        function animateValidationChart() {
-            const ctx = document.getElementById('validationChart').getContext('2d');
+                manualBar.style.width = '95%'; // Manual method has high bias
+            }, 500);
             
-            // Destroy existing chart if it exists
-            if (validationChart) {
-                validationChart.destroy();
+            setTimeout(() => {
+                aiBar.style.width = '15%'; // AI method has low error
+            }, 1000);
+        }
+
+        // Chart creation (AI vs Manual vs Ground Truth comparison) - SUPER INTERACTIVE & DYNAMIC
+        function createComparisonChart() {
+            const canvas = document.getElementById('comparisonChart');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 800;
+            canvas.height = 450;
+            
+            // REAL DATA from your lab results!
+            const realData = [
+                { sample: 'IMG-1', groundTruth: 13.9, manual: 70.0, ai: 12.68 },
+                { sample: 'IMG-9', groundTruth: 9.4, manual: 68.75, ai: 11.42 },
+                { sample: 'IMG-10', groundTruth: 6.6, manual: 62.5, ai: 8.76 },
+                { sample: 'IMG-14', groundTruth: 8.3, manual: 70.3, ai: 9.11 },
+                { sample: 'IMG-19', groundTruth: 11.9, manual: 76.19, ai: 10.57 }
+            ];
+            
+            const barWidth = 60;
+            const barSpacing = 120;
+            const chartStartX = 80;
+            const chartStartY = 60;
+            const chartHeight = 320;
+            const maxValue = 80;
+            
+            let animationProgress = 0;
+            let hoveredBar = null;
+            let clickedBar = null;
+            let particles = [];
+            let pulsePhase = 0;
+            
+            // Particle system for visual effects
+            class Particle {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.vx = (Math.random() - 0.5) * 4;
+                    this.vy = -Math.random() * 3 - 1;
+                    this.life = 1.0;
+                    this.decay = 0.02;
+                    this.color = color;
+                    this.size = Math.random() * 3 + 1;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vy += 0.1; // gravity
+                    this.life -= this.decay;
+                    this.size *= 0.99;
+                }
+                
+                draw(ctx) {
+                    ctx.save();
+                    ctx.globalAlpha = this.life;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
             }
             
-            validationChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['IMG1', 'IMG9', 'IMG10', 'IMG14', 'IMG19'],
-                    datasets: [
-                        {
-                            label: 'Ground Truth 🎯',
-                            data: [],
-                            backgroundColor: '#10b981',
-                            borderColor: '#047857',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'AI Method 🤖',
-                            data: [],
-                            backgroundColor: '#3b82f6',
-                            borderColor: '#1e40af',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Manual Method 📏',
-                            data: [],
-                            backgroundColor: '#ef4444',
-                            borderColor: '#dc2626',
-                            borderWidth: 2
+            // Mouse interaction handling
+            let mouseX = 0, mouseY = 0;
+            
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+                
+                // Check which bar is being hovered
+                hoveredBar = null;
+                realData.forEach((data, index) => {
+                    const x = chartStartX + index * barSpacing + 20;
+                    if (mouseX >= x && mouseX <= x + 58 && 
+                        mouseY >= chartStartY && mouseY <= chartStartY + chartHeight) {
+                        hoveredBar = { index, data, x };
+                        
+                        // Create particles on hover
+                        if (Math.random() < 0.3) {
+                            particles.push(new Particle(
+                                mouseX + (Math.random() - 0.5) * 20,
+                                mouseY + (Math.random() - 0.5) * 20,
+                                '#4ecdc4'
+                            ));
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeOutBounce'
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'The Great Validation Showdown 🥊',
-                            font: { size: 18 }
-                        },
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                usePointStyle: true,
-                                font: { size: 14 }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Colonization Percentage (%)',
-                                font: { size: 14 }
-                            }
-                        }
+                    }
+                });
+            });
+            
+            canvas.addEventListener('click', (e) => {
+                if (hoveredBar) {
+                    clickedBar = hoveredBar;
+                    
+                    // Create explosion of particles
+                    for (let i = 0; i < 15; i++) {
+                        particles.push(new Particle(
+                            hoveredBar.x + 29,
+                            chartStartY + chartHeight - 50,
+                            ['#e74c3c', '#27ae60', '#3498db'][Math.floor(Math.random() * 3)]
+                        ));
+                    }
+                    
+                    // Vibration effect (if supported)
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
                     }
                 }
             });
             
-            // Animate data entry
-            setTimeout(() => {
-                validationChart.data.datasets[0].data = [13.9, 9.4, 6.6, 8.3, 11.9];
-                validationChart.update();
-            }, 500);
-            
-            setTimeout(() => {
-                validationChart.data.datasets[1].data = [12.68, 11.42, 8.76, 9.11, 10.57];
-                validationChart.update();
-            }, 1500);
-            
-            setTimeout(() => {
-                validationChart.data.datasets[2].data = [70, 68.75, 62.5, 70.3, 76.19];
-                validationChart.update();
-            }, 2500);
-        }
-
-        // Smooth scroll to top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            canvas.addEventListener('mouseleave', () => {
+                hoveredBar = null;
             });
-        }
-
-        // Auto-animate chart when it comes into view
-        const chartObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('chart-animated')) {
-                    setTimeout(() => {
-                        animateValidationChart();
-                        entry.target.classList.add('chart-animated');
-                    }, 500);
+            
+            function drawComparisonChart() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                pulsePhase += 0.1;
+                
+                // Draw background grid with subtle animation
+                ctx.strokeStyle = `rgba(224, 224, 224, ${0.5 + 0.2 * Math.sin(pulsePhase * 0.5)})`;
+                ctx.lineWidth = 1;
+                
+                for (let i = 0; i <= 8; i++) {
+                    const y = chartStartY + (chartHeight / 8) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(chartStartX, y);
+                    ctx.lineTo(canvas.width - 20, y);
+                    ctx.stroke();
                 }
-            });
-        }, { threshold: 0.5 });
+                
+                // Draw Y-axis labels
+                ctx.fillStyle = '#666';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'right';
+                for (let i = 0; i <= 8; i++) {
+                    const y = chartStartY + chartHeight - (chartHeight / 8) * i;
+                    const value = i * 10;
+                    ctx.fillText(value + '%', chartStartX - 10, y + 4);
+                }
+                
+                // Draw bars for each sample with enhanced interactivity
+                const maxAnimatedSamples = Math.floor(animationProgress * realData.length);
+                
+                realData.forEach((data, index) => {
+                    if (index > maxAnimatedSamples) return;
+                    
+                    const x = chartStartX + index * barSpacing + 20;
+                    const animationFactor = index === maxAnimatedSamples ? 
+                        (animationProgress * realData.length) % 1 : 1;
+                    
+                    const isHovered = hoveredBar && hoveredBar.index === index;
+                    const isClicked = clickedBar && clickedBar.index === index;
+                    
+                    // Enhanced bar rendering with glow effects
+                    const glowIntensity = isHovered ? 10 : (isClicked ? 15 : 0);
+                    
+                    // Ground Truth (blue) - shorter bars, accurate
+                    const truthHeight = (data.groundTruth / maxValue) * chartHeight * animationFactor;
+                    ctx.save();
+                    if (glowIntensity > 0) {
+                        ctx.shadowColor = '#3498db';
+                        ctx.shadowBlur = glowIntensity;
+                    }
+                    ctx.fillStyle = isHovered ? '#5dade2' : '#3498db';
+                    const truthScale = isHovered ? 1.1 : 1;
+                    const truthWidth = 18 * truthScale;
+                    ctx.fillRect(x - (truthWidth - 18) / 2, chartStartY + chartHeight - truthHeight, truthWidth, truthHeight);
+                    ctx.restore();
+                    
+                    // AI (green) - close to ground truth
+                    const aiHeight = (data.ai / maxValue) * chartHeight * animationFactor;
+                    ctx.save();
+                    if (glowIntensity > 0) {
+                        ctx.shadowColor = '#27ae60';
+                        ctx.shadowBlur = glowIntensity;
+                    }
+                    ctx.fillStyle = isHovered ? '#58d68d' : '#27ae60';
+                    const aiScale = isHovered ? 1.1 : 1;
+                    const aiWidth = 18 * aiScale;
+                    ctx.fillRect(x + 20 - (aiWidth - 18) / 2, chartStartY + chartHeight - aiHeight, aiWidth, aiHeight);
+                    ctx.restore();
+                    
+                    // Manual (red) - dramatically taller, showing bias
+                    const manualHeight = (data.manual / maxValue) * chartHeight * animationFactor;
+                    ctx.save();
+                    if (glowIntensity > 0) {
+                        ctx.shadowColor = '#e74c3c';
+                        ctx.shadowBlur = glowIntensity;
+                    }
+                    ctx.fillStyle = isHovered ? '#ec7063' : '#e74c3c';
+                    const manualScale = isHovered ? 1.1 : 1;
+                    const manualWidth = 18 * manualScale;
+                    ctx.fillRect(x + 40 - (manualWidth - 18) / 2, chartStartY + chartHeight - manualHeight, manualWidth, manualHeight);
+                    ctx.restore();
+                    
+                    // Add dramatic visual emphasis for manual bars with pulsing effect
+                    if (animationFactor > 0.8) {
+                        const pulseIntensity = 1 + 0.3 * Math.sin(pulsePhase + index);
+                        ctx.strokeStyle = `rgba(192, 57, 43, ${pulseIntensity})`;
+                        ctx.lineWidth = isHovered ? 4 : 2;
+                        ctx.strokeRect(x + 40, chartStartY + chartHeight - manualHeight, 18, manualHeight);
+                        
+                        // Add warning symbol for manual bars with glow
+                        ctx.save();
+                        ctx.fillStyle = isHovered ? '#fff' : '#fff';
+                        ctx.font = `bold ${isHovered ? 14 : 12}px Arial`;
+                        ctx.textAlign = 'center';
+                        if (isHovered) {
+                            ctx.shadowColor = '#fff';
+                            ctx.shadowBlur = 5;
+                        }
+                        ctx.fillText('!', x + 49, chartStartY + chartHeight - manualHeight + 15);
+                        ctx.restore();
+                    }
+                    
+                    // Sample labels with hover effects
+                    ctx.fillStyle = isHovered ? '#2c3e50' : '#333';
+                    ctx.font = isHovered ? 'bold 12px Arial' : '11px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(data.sample, x + 29, chartStartY + chartHeight + 20);
+                    
+                    // Interactive value labels on hover
+                    if (isHovered && animationFactor > 0.9) {
+                        ctx.save();
+                        ctx.font = 'bold 11px Arial';
+                        
+                        // Ground truth label
+                        ctx.fillStyle = '#3498db';
+                        ctx.fillText(`${data.groundTruth.toFixed(1)}%`, x + 9, chartStartY + chartHeight - truthHeight - 5);
+                        
+                        // AI label
+                        ctx.fillStyle = '#27ae60';
+                        ctx.fillText(`${data.ai.toFixed(1)}%`, x + 29, chartStartY + chartHeight - aiHeight - 5);
+                        
+                        // Manual label with emphasis
+                        ctx.fillStyle = '#e74c3c';
+                        ctx.fillText(`${data.manual.toFixed(0)}%`, x + 49, chartStartY + chartHeight - manualHeight - 5);
+                        
+                        ctx.restore();
+                    }
+                });
+                
+                // Update and draw particles
+                particles = particles.filter(particle => {
+                    particle.update();
+                    particle.draw(ctx);
+                    return particle.life > 0;
+                });
+                
+                // Draw enhanced legend with glow effects
+                const legendY = 20;
+                const legendX = chartStartX + 50;
+                
+                // Ground truth
+                ctx.save();
+                ctx.shadowColor = '#3498db';
+                ctx.shadowBlur = 2;
+                ctx.fillStyle = '#3498db';
+                ctx.fillRect(legendX, legendY, 18, 12);
+                ctx.restore();
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 13px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText('Ground Truth (Accurate)', legendX + 25, legendY + 9);
+                
+                // AI prediction
+                ctx.save();
+                ctx.shadowColor = '#27ae60';
+                ctx.shadowBlur = 2;
+                ctx.fillStyle = '#27ae60';
+                ctx.fillRect(legendX + 200, legendY, 18, 12);
+                ctx.restore();
+                ctx.fillStyle = '#333';
+                ctx.fillText('AI Prediction (±2%!)', legendX + 225, legendY + 9);
+                
+                // Manual count with pulsing emphasis
+                ctx.save();
+                const manualPulse = 1 + 0.3 * Math.sin(pulsePhase * 2);
+                ctx.shadowColor = '#e74c3c';
+                ctx.shadowBlur = 5 * manualPulse;
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(legendX + 400, legendY, 18, 12);
+                ctx.strokeStyle = '#c0392b';
+                ctx.lineWidth = 2 * manualPulse;
+                ctx.strokeRect(legendX + 400, legendY, 18, 12);
+                ctx.restore();
+                ctx.fillStyle = '#e74c3c';
+                ctx.font = 'bold 13px Arial';
+                ctx.fillText('Manual Count (BIASED!)', legendX + 425, legendY + 9);
+                
+                // Interactive tooltip
+                if (hoveredBar) {
+                    const tooltipX = mouseX + 10;
+                    const tooltipY = mouseY - 80;
+                    
+                    ctx.save();
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                    ctx.fillRect(tooltipX, tooltipY, 200, 70);
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.fillText(`${hoveredBar.data.sample} Details:`, tooltipX + 10, tooltipY + 20);
+                    ctx.font = '11px Arial';
+                    ctx.fillStyle = '#3498db';
+                    ctx.fillText(`Truth: ${hoveredBar.data.groundTruth}%`, tooltipX + 10, tooltipY + 35);
+                    ctx.fillStyle = '#27ae60';
+                    ctx.fillText(`AI: ${hoveredBar.data.ai}%`, tooltipX + 10, tooltipY + 50);
+                    ctx.fillStyle = '#e74c3c';
+                    ctx.fillText(`Manual: ${hoveredBar.data.manual}%`, tooltipX + 100, tooltipY + 50);
+                    ctx.restore();
+                }
+                
+                // Axis labels
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Sample Images from Lab Dataset (Click & Hover!)', canvas.width / 2, canvas.height - 10);
+                
+                ctx.save();
+                ctx.translate(25, canvas.height / 2);
+                ctx.rotate(-Math.PI / 2);
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('Colonization Percentage (%)', 0, 0);
+                ctx.restore();
+                
+                // Add dramatic text annotations with pulse effects
+                if (animationProgress > 0.8) {
+                    const textPulse = 1 + 0.2 * Math.sin(pulsePhase * 1.5);
+                    
+                    ctx.save();
+                    ctx.fillStyle = '#e74c3c';
+                    ctx.font = `bold ${16 * textPulse}px Arial`;
+                    ctx.textAlign = 'left';
+                    ctx.shadowColor = '#e74c3c';
+                    ctx.shadowBlur = 3;
+                    ctx.fillText('Manual counting shows', chartStartX + 450, chartStartY + 50);
+                    ctx.fillText('600% OVERESTIMATION!', chartStartX + 450, chartStartY + 70);
+                    ctx.restore();
+                    
+                    ctx.save();
+                    ctx.fillStyle = '#27ae60';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.shadowColor = '#27ae60';
+                    ctx.shadowBlur = 2;
+                    ctx.fillText('AI predictions within', chartStartX + 450, chartStartY + 110);
+                    ctx.fillText('±2% of ground truth', chartStartX + 450, chartStartY + 130);
+                    ctx.restore();
+                }
+                
+                // Continue animation
+                if (animationProgress < 1) {
+                    animationProgress += 0.015;
+                }
+                
+                // Always continue for interactive effects
+                requestAnimationFrame(drawComparisonChart);
+            }
+            
+            drawComparisonChart();
+            
+            // Add click instruction
+            const instruction = document.createElement('div');
+            instruction.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.7);
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                pointer-events: none;
+            `;
+            instruction.textContent = '💡 Hover & Click bars for interaction!';
+            canvas.parentElement.style.position = 'relative';
+            canvas.parentElement.appendChild(instruction);
+        }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize animations when sections come into view
+        let countersAnimated = false;
+        let chartAnimated = false;
+        let progressAnimated = false;
+
+        function checkAnimations() {
+            // Counter animation
+            const heroSection = document.querySelector('.hero');
+            const heroRect = heroSection.getBoundingClientRect();
+            if (!countersAnimated && heroRect.top < window.innerHeight * 0.5) {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    animateCounter(counter, target);
+                });
+                countersAnimated = true;
+            }
+
+            // Progress bar animation
+            const performanceSection = document.querySelector('.performance');
+            const perfRect = performanceSection.getBoundingClientRect();
+            if (!progressAnimated && perfRect.top < window.innerHeight * 0.7) {
+                animateProgressBars();
+                progressAnimated = true;
+            }
+
+            // Chart animation
             const chartContainer = document.querySelector('.chart-container');
-            if (chartContainer) {
-                chartObserver.observe(chartContainer);
+            const chartRect = chartContainer.getBoundingClientRect();
+            if (!chartAnimated && chartRect.top < window.innerHeight * 0.8) {
+                createComparisonChart();
+                chartAnimated = true;
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            handleScroll();
+            checkAnimations();
+        });
+
+        window.addEventListener('load', () => {
+            handleScroll();
+            checkAnimations();
+        });
+
+        // Add some fun interactions
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) rotate(1deg)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotate(0deg)';
+            });
+        });
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.animation = 'rainbow 1s infinite';
+                alert('🍄 Congratulations! You found the secret mycorrhizal code! Your dedication to fungi is impressive! 🍄');
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 5000);
             }
         });
+
+        // Add rainbow animation for easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
