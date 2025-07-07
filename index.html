@@ -566,6 +566,12 @@
             .section h2 {
                 font-size: 2rem;
             }
+            
+            /* Make comparison section responsive */
+            #comparison .container > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
         }
 
         /* Progress Bar */
@@ -694,7 +700,7 @@
                 <h1>🍄🤖 Mycorrhizal AI</h1>
                 <p class="subtitle">Advanced Transfer Learning for Mycorrhizal Quantification</p>
                 <p class="tagline">"Revolutionizing fungal detection with 24 images and a lot of neural magic!"</p>
-                <a href="#features" class="cta-button">Explore the Technology 🚀</a>
+                <a href="#applications" class="cta-button">Explore the Technology 🚀</a>
             </div>
         </div>
     </section>
@@ -950,79 +956,110 @@
         </div>
     </section>
 
-    <!-- Research Applications -->
+    <!-- Real-World Applications -->
     <section class="section" id="applications">
         <div class="container">
-            <h2>🌍 Real-World Research Applications</h2>
+            <h2>🌍 Real-World Applications & Impact</h2>
             <p style="text-align: center; font-size: 1.3rem; margin-bottom: 3rem; color: #64ffda;">
-                "From lab bench to field studies - transforming how we understand plant-fungal partnerships"
+                "From laboratory research to agricultural fields - transforming how we understand plant-fungal partnerships"
             </p>
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <span class="feature-icon">🌱</span>
-                    <h3>Agricultural Research</h3>
-                    <p>Rapid assessment of <strong>crop mycorrhizal status</strong> for optimizing fertilizer use and sustainable farming practices. Perfect for large-scale agricultural studies.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">🌲</span>
-                    <h3>Forest Ecology</h3>
-                    <p>Monitor <strong>forest health indicators</strong> through mycorrhizal colonization patterns. Ideal for climate change impact studies and restoration projects.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">🧪</span>
-                    <h3>Experimental Studies</h3>
-                    <p>Standardized quantification for <strong>controlled experiments</strong> - nutrient treatments, stress responses, and species comparisons with consistent methodology.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">📚</span>
-                    <h3>Educational Research</h3>
-                    <p>Teaching tool for students learning mycorrhizal biology. <strong>Instant feedback</strong> on colonization assessment skills and training standardization.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">⏱️</span>
-                    <h3>Temporal Studies</h3>
-                    <p>Track <strong>colonization dynamics</strong> over time with consistent measurement criteria. Perfect for seasonal studies and development research.</p>
+                    <span class="feature-icon">🌾</span>
+                    <h3>Sustainable Agriculture</h3>
+                    <p>Optimize <strong>mycorrhizal inoculation strategies</strong> for crop production. Screen soil health and monitor the effectiveness of biological fertilizers in real-time.</p>
                 </div>
                 
                 <div class="feature-card">
                     <span class="feature-icon">🔬</span>
-                    <h3>Multi-Species Analysis</h3>
-                    <p>Compare colonization patterns across <strong>different plant species</strong> with standardized metrics. Enables large-scale comparative ecology.</p>
+                    <h3>Ecological Research</h3>
+                    <p>Accelerate <strong>large-scale field studies</strong> on plant-fungal interactions. Enable longitudinal monitoring of ecosystem health and biodiversity assessments.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🌱</span>
+                    <h3>Restoration Ecology</h3>
+                    <p>Monitor <strong>ecosystem recovery</strong> in restored habitats. Track mycorrhizal reestablishment as an indicator of soil ecosystem functionality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🌡️</span>
+                    <h3>Climate Change Research</h3>
+                    <p>Study how <strong>environmental stress</strong> affects plant-fungal partnerships. Monitor mycorrhizal responses to changing precipitation and temperature patterns.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💊</span>
+                    <h3>Pharmaceutical Research</h3>
+                    <p>Screen <strong>bioactive compounds</strong> from mycorrhizal fungi. Accelerate drug discovery from soil microbiomes and plant-associated organisms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🏭</span>
+                    <h3>Industrial Applications</h3>
+                    <p>Quality control for <strong>commercial inoculants</strong>. Standardize mycorrhizal product testing and certification across the biotechnology industry.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- AI vs Manual Methods -->
+    <section class="section" id="comparison">
+        <div class="container">
+            <h2>🔬 AI vs Manual Methods: The Fundamental Difference</h2>
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 3rem; color: #64ffda;">
+                "It's not just about being faster - we're measuring completely different biological parameters!"
+            </p>
             
-            <div class="demo-container" style="margin-top: 3rem;">
-                <h3 style="color: #00ffff; margin-bottom: 2rem;">🎯 Validated Performance Metrics</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    <div style="background: rgba(0,255,255,0.1); padding: 25px; border-radius: 15px; border: 1px solid rgba(0,255,255,0.3); text-align: center;">
-                        <h4 style="color: #64ffda; font-size: 1.5rem;">77.4%</h4>
-                        <p>Mean Accuracy</p>
-                        <small style="opacity: 0.8;">Validated on 21 images</small>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 3rem;">
+                <div class="demo-container">
+                    <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem;">🤖 AI Method: Surface Area Quantification</h3>
+                    <div style="background: rgba(0,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 2rem;">
+                        <p><strong>What it measures:</strong> Percentage of root surface area colonized by mycorrhizal structures</p>
+                        <p><strong>Detection method:</strong> Pixel-level computer vision analysis across entire root surface</p>
+                        <p><strong>Biological relevance:</strong> Represents functional interface area for nutrient exchange</p>
+                        <p><strong>Typical range:</strong> 1-15% (as observed in <em>Litsea oleoides</em>)</p>
                     </div>
-                    <div style="background: rgba(100,255,218,0.1); padding: 25px; border-radius: 15px; border: 1px solid rgba(100,255,218,0.3); text-align: center;">
-                        <h4 style="color: #64ffda; font-size: 1.5rem;">r = 0.873</h4>
-                        <p>Correlation</p>
-                        <small style="opacity: 0.8;">vs Expert Annotations</small>
-                    </div>
-                    <div style="background: rgba(0,150,255,0.1); padding: 25px; border-radius: 15px; border: 1px solid rgba(0,150,255,0.3); text-align: center;">
-                        <h4 style="color: #64ffda; font-size: 1.5rem;">1.55%</h4>
-                        <p>Mean Error</p>
-                        <small style="opacity: 0.8;">Exceptional Precision</small>
-                    </div>
-                    <div style="background: rgba(0,200,200,0.1); padding: 25px; border-radius: 15px; border: 1px solid rgba(0,200,200,0.3); text-align: center;">
-                        <h4 style="color: #64ffda; font-size: 1.5rem;">24</h4>
-                        <p>Training Images</p>
-                        <small style="opacity: 0.8;">Remarkable Efficiency</small>
+                    <div style="text-align: center; padding: 20px; background: rgba(100,255,218,0.1); border-radius: 10px;">
+                        <h4 style="color: #64ffda;">🎯 Key Advantage</h4>
+                        <p>"Measures what actually matters for plant nutrition - the working surface area!"</p>
                     </div>
                 </div>
                 
-                <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #b3e5fc;">
-                    "Ready for immediate deployment in your research pipeline - no additional training required!"
+                <div class="demo-container">
+                    <h3 style="color: #64ffda; text-align: center; margin-bottom: 2rem;">👁️ Manual Method: Length Quantification</h3>
+                    <div style="background: rgba(100,255,218,0.1); padding: 25px; border-radius: 15px; margin-bottom: 2rem;">
+                        <p><strong>What it measures:</strong> Percentage of root length segments containing mycorrhizal structures</p>
+                        <p><strong>Detection method:</strong> Visual identification at grid intersection points</p>
+                        <p><strong>Biological relevance:</strong> Represents presence/absence distribution along root length</p>
+                        <p><strong>Typical range:</strong> 30-95% (higher due to length-based sampling)</p>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: rgba(0,150,255,0.1); border-radius: 10px;">
+                        <h4 style="color: #64ffda;">📍 Key Advantage</h4>
+                        <p>"Shows where mycorrhizae are distributed along the root system!"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-container" style="margin-top: 3rem; text-align: center;">
+                <h3 style="color: #00ffff; margin-bottom: 2rem;">🤝 Why Both Methods Are Valuable</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(0,255,255,0.1); padding: 20px; border-radius: 15px;">
+                        <h4 style="color: #64ffda;">Complementary Information</h4>
+                        <p>Surface area (AI) + distribution (manual) = complete picture of colonization</p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.1); padding: 20px; border-radius: 15px;">
+                        <h4 style="color: #64ffda;">Different Research Questions</h4>
+                        <p>Use AI for functional studies, manual for distribution mapping</p>
+                    </div>
+                    <div style="background: rgba(0,150,255,0.1); padding: 20px; border-radius: 15px;">
+                        <h4 style="color: #64ffda;">Cross-Validation</h4>
+                        <p>Both methods can validate each other's findings</p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-style: italic; color: #b3e5fc;">
+                    "It's like comparing apples and oranges - both are fruit, both are useful, but they tell you different things about the orchard!"
                 </p>
             </div>
         </div>
@@ -1109,7 +1146,7 @@
                 "From 24 training images to research-grade results - because the future of ecology is quantitative, automated, and surprisingly elegant."
             </p>
             <div style="text-align: center;">
-                <a href="#demo" class="cta-button pulse">Explore the Future 🚀</a>
+                <a href="#applications" class="cta-button pulse">Explore Applications 🚀</a>
             </div>
         </div>
     </section>
@@ -1581,60 +1618,8 @@
         observer.observe(document.getElementById('stats'));
         observer.observe(document.getElementById('data-viz'));
 
-        // Demo functionality
-        function runDemo(type) {
-            const resultDiv = document.getElementById('demo-result');
-            resultDiv.innerHTML = '<div style="font-size: 2rem;">🔄 Processing...</div>';
-            
-            setTimeout(() => {
-                switch(type) {
-                    case 'colonization':
-                        resultDiv.innerHTML = `
-                            <div>
-                                <h3>🎯 Colonization Analysis Complete!</h3>
-                                <p><strong>Detected:</strong> 12.3% surface area colonization</p>
-                                <p><strong>Confidence:</strong> 94.2%</p>
-                                <p><strong>Time taken:</strong> 0.3 seconds</p>
-                                <p><em>"This root is more colonized than America!"</em> 🦅</p>
-                            </div>
-                        `;
-                        break;
-                    case 'bulk':
-                        resultDiv.innerHTML = `
-                            <div>
-                                <h3>📦 Bulk Analysis Results!</h3>
-                                <p><strong>Images processed:</strong> 157</p>
-                                <p><strong>Average colonization:</strong> 8.7%</p>
-                                <p><strong>Time saved vs manual:</strong> 23.5 hours!</p>
-                                <p><strong>Training data used:</strong> Only 24 images! 🤯</p>
-                                <p><em>"That's enough time to watch the entire Lord of the Rings trilogy!"</em> 🧙‍♂️</p>
-                            </div>
-                        `;
-                        break;
-                    case 'export':
-                        resultDiv.innerHTML = `
-                            <div>
-                                <h3>📊 Export Successful!</h3>
-                                <p><strong>Format:</strong> CSV with 15 columns</p>
-                                <p><strong>Statistics included:</strong> Mean, SD, Min, Max</p>
-                                <p><strong>Your advisor's reaction:</strong> "Finally, clean data!" 😍</p>
-                                <p><em>Excel has never looked so beautiful!</em> ✨</p>
-                            </div>
-                        `;
-                        break;
-                    case 'surprise':
-                        const surprises = [
-                            "🦄 Our AI just discovered a unicorn-shaped mycorrhiza! (Just kidding, but the colonization is 15.7%)",
-                            "🎉 Congratulations! You've found the Easter egg! The AI is now 0.001% happier!",
-                            "🤖 BEEP BOOP. AI HUMOR MODULE ACTIVATED. WHY DID THE MYCORRHIZA CROSS THE ROOT? TO GET TO THE OTHER PHLOEM!",
-                            "🍄 Fun fact: This AI can detect mycorrhizae faster than fungi can say 'symbiosis'!",
-                            "🌱 Breaking news: Local AI becomes self-aware, immediately applies for PhD in mycology!"
-                        ];
-                        resultDiv.innerHTML = `<div>${surprises[Math.floor(Math.random() * surprises.length)]}</div>`;
-                        break;
-                }
-            }, 1500);
-        }
+        // Demo functionality - removed since demo section was replaced
+        // with real-world applications and AI vs manual comparison
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
